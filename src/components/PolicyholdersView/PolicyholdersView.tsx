@@ -18,6 +18,7 @@ function PolicyholdersView() {
     'Add zero-state messaging in UI',
     'Clear console.logs',
     'Consider data storage and caching',
+    'Figure out aria-current fix',
     'Verify accessibility',
   ];
 
