@@ -1,12 +1,13 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import TableDemoView from './components/TableDemoView';
-import HomeView from './components/HomeView';
-import RedirectView from './components/RedirectView';
-import YouCanDoItView from './components/YouCanDoItView';
-import Layout from './components/Layout';
 import { useState } from 'react';
-import Modal from './components/Modal';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomeView from './components/HomeView';
 import Instructions from './components/Instructions';
+import Layout from './components/Layout';
+import Modal from './components/Modal';
+import PolicyholdersView from './components/PolicyholdersView';
+import RedirectView from './components/RedirectView';
+import TableDemoView from './components/TableDemoView';
+import YouCanDoItView from './components/YouCanDoItView';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,15 +16,16 @@ function App() {
     <BrowserRouter>
       <Layout onFooterClick={() => setIsModalOpen(true)}>
         <Routes>
+          <Route path="*" element={<RedirectView />} />
           <Route path="/" element={<HomeView />} />
+          <Route path="/policyholders" element={<PolicyholdersView />} />
           <Route path="/table" element={<TableDemoView />} />
           <Route path="/you-can-do-it" element={<YouCanDoItView />} />
-          <Route path="*" element={<RedirectView />} />
         </Routes>
       </Layout>
       <Modal
-        isOpen={isModalOpen}
         handleClose={() => setIsModalOpen(false)}
+        isOpen={isModalOpen}
         title="Sure Technical Challenge"
       >
         <Instructions />
