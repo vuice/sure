@@ -1,5 +1,6 @@
-import InstructionsBar from './InstructionsBar';
+import { fireEvent } from '@testing-library/react';
 import { renderWithProviders } from '../../utils/test';
+import InstructionsBar from './InstructionsBar';
 
 describe('InstructionsBar', () => {
   const defaultProps = {
@@ -11,6 +12,9 @@ describe('InstructionsBar', () => {
     expect(getByText('View challenges')).toBeInTheDocument();
   });
 
-  // TODO: Challenge 3
-  it('should call the onClick prop when the button is clicked', () => {});
+  it('should call the onClick prop when the button is clicked', () => {
+    const { getByRole } = renderWithProviders(<InstructionsBar {...defaultProps} />);
+    fireEvent.click(getByRole('button'));
+    expect(defaultProps.onClick).toHaveBeenCalledTimes(1);
+  });
 });

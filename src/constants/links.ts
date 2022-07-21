@@ -1,18 +1,18 @@
 const links = [
   {
-    text: 'Policyholders',
-    href: '/policyholders',
     'data-testid': 'policyholders_link',
+    href: '/policyholders',
+    text: 'Policy Holders',
   },
   {
-    text: 'Table Example',
-    href: '/table',
     'data-testid': 'table_link',
+    href: '/table',
+    text: 'Table Example',
   },
   {
-    text: 'You Can Do It',
-    href: '/you-can-do-it',
     'data-testid': 'you_go_link',
+    href: '/you-can-do-it',
+    text: 'You Can Do It',
   },
 ];
 
