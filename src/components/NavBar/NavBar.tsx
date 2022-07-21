@@ -1,52 +1,71 @@
-import { Link, Box } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Box, Link, List, ListItem, ListItemText } from '@mui/material';
+
 type TNavBar = {
   links: {
-    text: string;
-    href: string;
     'data-testid'?: string;
+    href: string;
+    text: string;
   }[];
 };
 
+const listStyle = {
+  width: '100%',
+} as const;
+const listItemStyle = {
+  color: '#fff',
+  cursor: 'pointer',
+  padding: 0,
+  textAlign: 'center',
+  '&:hover': {
+    textDecoration: 'underline',
+  },
+  '&:not(:last-of-type)': {
+    marginBottom: '4px',
+  },
+  '&.Mui-selected': {
+    backgroundColor: '#f00',
+  },
+} as const;
+
 function NavBar({ links }: TNavBar) {
+  const location = useLocation()
+
   return (
     <Box
-      component="aside"
+      component='aside'
       sx={{
+        alignItems: 'center',
         background: '#0c2975',
-        padding: '16px',
-        width: '200px',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        padding: '16px',
+        width: '200px',
       }}
     >
       <Link
         component={RouterLink}
-        to="/"
         sx={{ cursor: 'pointer', marginBottom: '80px', marginTop: '40px' }}
+        to='/'
       >
-        <img src="/surelogo.svg" alt="logo"></img>
+        <img alt="logo" src="/surelogo.svg" />
       </Link>
-
-      {links.map(({ text, href, 'data-testid': dataTestId }) => (
-        <Link
-          component={RouterLink}
-          key={href}
-          to={href}
-          color="#fff"
-          underline="hover"
-          sx={{
-            cursor: 'pointer',
-            '&:not(:last-of-type)': {
-              marginBottom: '16px',
-            },
-          }}
-          data-testid={dataTestId}
-        >
-          {text}
-        </Link>
-      ))}
+      <List role='menu' sx={listStyle}>
+        {links.map(({ text, href, 'data-testid': dataTestId }) => (
+          <ListItem
+            aria-label={href === location.pathname ? 'page' : ''} // TODO: Figure out aria-current fix
+            component={RouterLink}
+            data-testid={dataTestId}
+            key={href}
+            role='menuitem'
+            selected={href === location.pathname}
+            sx={listItemStyle}
+            to={href}
+          >
+            <ListItemText>{text}</ListItemText>
+          </ListItem>
+        ))}
+      </List>
     </Box>
   );
 }
