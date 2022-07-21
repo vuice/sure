@@ -47,4 +47,17 @@ const mockPolicyHoldersList = {
   ]
 };
 
-export { mockPolicyHoldersList };
+const mockSinglePolicyHolder = {
+  name: "My Name 100",
+  age: 100,
+  address: {
+    line1: "100 Any Street",
+    line2: "Apt 100",
+    city: "City 100",
+    state: "State 100",
+    postalCode: "100100"
+  },
+  phoneNumber: "+1-100-100-1000"
+}
+
+export { mockPolicyHoldersList, mockSinglePolicyHolder };
