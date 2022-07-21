@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, List, ListItem, ListItemText } from '@mui/material';
 import { mockPolicyHoldersList, mockSinglePolicyHolder } from '../../constants/mockPolicyHoldersData';
 import InfoTable from '../InfoTable';
 
@@ -10,10 +10,20 @@ type TPolicyHoldersList = {
 function PolicyholdersView() {
   const apiUrl = 'https://fe-interview-technical-challenge-api-git-main-sure.vercel.app/api/policyholders';
   const defaultPolicyHoldersList: TPolicyHoldersList = { policyHolders: [[]] };
+  const toDoList: string[] = [
+    'Add actual form to add policy holders',
+    'Add error messaging in UI',
+    'Add loading icon/screen in UI during GET/POST requests',
+    'Add localization support',
+    'Add zero-state messaging in UI',
+    'Clear console.logs',
+    'Consider data storage and caching',
+    'Verify accessibility',
+  ];
 
   const [policyHoldersList, setPolicyHoldersList] = useState(defaultPolicyHoldersList);
 
-  const formatData = (dataArray: any) => {
+  const formatData = (dataArray: []) => {
     const formattedData = dataArray.map((
       {
         name = '',
@@ -129,6 +139,15 @@ function PolicyholdersView() {
       >
         Add a policy holder
       </Button>
+      <List>
+        {toDoList.map((value, i) => {
+          return (
+            <ListItem key={i} disablePadding>
+                <ListItemText id={`label-${i}`} primary={`${value}`} />
+            </ListItem>
+          );
+        })}
+      </List>
     </Box>
   );
 };
